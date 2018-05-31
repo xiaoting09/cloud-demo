@@ -1,0 +1,14 @@
+group 'com.xiao'
+version '0.0.1-SNAPSHOT'
+description "测试bean"
+apply plugin: 'java'
+
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task initdirs << {
+    sourceSets*.allSource.srcDirs.flatten()*.mkdirs()
+    //webAppDir.mkdirs()
+}

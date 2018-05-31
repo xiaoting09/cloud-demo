@@ -1,0 +1,18 @@
+group 'com.xiao'
+version '0.0.1-SNAPSHOT'
+description "服务提供者注册示列"
+apply plugin: 'java'
+
+dependencies {
+    compile project(":cloud-bean")
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
+    runtime('org.springframework.boot:spring-boot-devtools')
+
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}

@@ -1,0 +1,13 @@
+rootProject.name = 'cloud-demo'
+include 'cloud-eureka-provider'
+include 'cloud-eureka-service'
+include 'cloud-eureka-consumer'
+include 'cloud-eureka-service-node-1'
+include 'cloud-eureka-service-node-2'
+include 'cloud-eureka-provider-node-1'
+include 'cloud-eureka-provider-node-2'
+include 'cloud-eureka-provider-node-3'
+include 'cloud-bean'
+include 'cloud-gateway'
+include 'cloud-turbine'
+

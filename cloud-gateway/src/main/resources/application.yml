@@ -1,0 +1,19 @@
+server:
+  port: 9800
+spring:
+  application:
+    name: eureka-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://test:test@localhost:8761/eureka/,http://test:test@localhost:8762/eureka/
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${random.value}
+    #获取实列的IP地址
+    prefer-ip-address: true
+    #客户端需要多久发送心跳检测,默认30s如果超时未发送则剔除
+    lease-renewal-interval-in-seconds: 15
+    # 获得在eureka服务上注册的应用程序的名字，默认为unknow
+    appname: cloud-gateway-demo
+    status-page-url-path: /actuator/info
+    hostname: ${spring.cloud.client.hostname}

@@ -1,0 +1,33 @@
+server:
+  port: 8762
+spring:
+  application:
+    name: eurekaService
+  security:
+    user:
+      name: test
+      password: test
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+    service-url:
+      #defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:${server.port}/eureka/
+      #defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:8763/eureka/,http://${spring.security.user.name}:${spring.security.user.password}@localhost:8761/eureka/
+      zone-2: http://${spring.security.user.name}:${spring.security.user.password}:zone-server-2:8762/eureka/
+      zone-1: http://${spring.security.user.name}:${spring.security.user.password}:zone-server-1:8761/eureka/
+    region: wuhan
+    availability-zones:
+      wuhan-2: zone-2,zone-1
+    # 设置过期剔除时间
+  instance:
+    lease-expiration-duration-in-seconds: 45
+    #hostname: ${spring.cloud.client.hostname}
+    hostname: zone-server-2
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${random.value}
+    # 关闭自我保护
+  server:
+    enable-self-preservation: false
+    #设置清理无效节点时间间隔默认 60000 (60)秒
+    eviction-interval-timer-in-ms: 5000

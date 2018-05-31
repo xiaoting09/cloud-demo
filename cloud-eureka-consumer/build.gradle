@@ -1,0 +1,16 @@
+description "服务消费者注册示列"
+dependencies {
+
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix')
+    compile('io.github.openfeign:feign-okhttp:9.7.0')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-server')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}

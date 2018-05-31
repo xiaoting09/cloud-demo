@@ -1,0 +1,65 @@
+server:
+  port: 9100
+spring:
+  application:
+    name: eurekaConsumer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://test:test@localhost:8761/eureka/,http://test:test@localhost:8762/eureka/
+    #  zone-1: http://test:test@localhost:8761/eureka/
+     # zone-2: http://test:test@localhost:8762/eureka/
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${random.value}
+    #获取实列的IP地址
+    prefer-ip-address: true
+    #客户端需要多久发送心跳检测,默认30s如果超时未发送则剔除
+    lease-renewal-interval-in-seconds: 15
+    # 获得在eureka服务上注册的应用程序的名字，默认为unknow
+    appname: cloud-consumer-demo
+    status-page-url-path: /actuator/info
+    hostname: ${spring.cloud.client.hostname}
+   # metadata-map:
+   #   zone: zone-2
+
+#设置ribbo策略 格式为应用名.ribbon.NFLoadBalancerRuleClassName=全类名
+#erekaProvider:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.xiao.configuration.FixedRule
+# 日志配置，默认是不打印任何的日志 Feign日志记录仅对DEBUG级别做出响应。
+logging:
+  level:
+    com:
+      xiao:
+        feign:
+          FeignUrlServer: DEBUG
+#为Feign请求启用请求或响应GZIP压缩
+feign:
+  # 在feign里面启用hystrix 默认false
+  hystrix:
+    enabled: true
+  okhttp:
+    enabled: false
+  httpclient:
+    enabled: true
+  compression:
+    response:
+      enabled: true
+    request:
+      enabled: true
+      mime-types: text/xml,application/xml,application/json
+      min-request-size: 2048
+hystrix:
+  command:
+#    getProvider:
+#      execution:
+#        isolation:
+#          strategy: SEMAPHORE  #在feign和Ribbon里面配置隔离策略 配置单个
+    default:
+      execution:
+        thread:
+          timeoutInMilliseconds: 5000
+        timeout:
+          enabled: false #禁用Hystrix的超时时间
+        isolation:
+          strategy: SEMAPHORE #在feign和Ribbon里面配置隔离策略（全局配置）

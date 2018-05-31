@@ -1,0 +1,25 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: erekaProvider
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://test:test@localhost:8761/eureka/,http://test:test@localhost:8762/eureka/
+    #  从eureka服务器注册表中获取注册信息的时间间隔（s），默认为30秒
+    registry-fetch-interval-seconds: 30
+  # 注册到eureka的唯一ID
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${random.value}
+    #获取实列的IP地址
+    prefer-ip-address: true
+    #客户端需要多久发送心跳检测,默认30s如果超时未发送则剔除
+    lease-renewal-interval-in-seconds: 15
+
+    #        获得在eureka服务上注册的应用程序的名字，默认为unknow
+    appname: cloud-provider-demo
+    status-page-url-path: /info
+#    hostname: ${spring.cloud.client.hostname}
+
