@@ -16,7 +16,7 @@ eureka:
     #客户端需要多久发送心跳检测,默认30s如果超时未发送则剔除
     lease-renewal-interval-in-seconds: 15
     # 获得在eureka服务上注册的应用程序的名字，默认为unknow
-    appname: cloud-consumer-demo
+    # appname: cloud-consumer-demo
     status-page-url-path: /actuator/info
     hostname: ${spring.cloud.client.hostname}
    # metadata-map:

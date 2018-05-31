@@ -17,3 +17,13 @@ eureka:
     appname: cloud-gateway-demo
     status-page-url-path: /actuator/info
     hostname: ${spring.cloud.client.hostname}
+zuul:
+  routes:
+    feign:
+      path: /consumer/**
+      #url: http://localhost:9100
+      serviceId: eurekaConsumer
+
+ribbon: # 解决第一次zuul加载时超时异常,启动饥饿加载
+  eager-load:
+    enabled: true
